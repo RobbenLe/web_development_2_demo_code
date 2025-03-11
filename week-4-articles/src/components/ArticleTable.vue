@@ -64,7 +64,16 @@ export default {
      * @param {number} id - The ID of the article to delete
      */
     async deleteArticle(id) {
+      try {
+        // await axios.delete(${(API_ENDPOINTS.articles)/$(id)}'); wrong version
+        await axios.delete(`${API_ENDPOINTS.articles}/${id}`);
+        await this.loadArticles();
+      } catch {
+        console.error(error);
+        this.error = e.error;
+      }
       console.log(`Deleting article with ID: ${id}`);
+
       console.error(new Error("Method not implemented"));
     },
   },
